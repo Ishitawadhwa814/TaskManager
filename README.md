@@ -75,15 +75,24 @@ PORT=5000
 
 1. Create a Railway account at https://railway.app.
 2. Create a new project and connect your GitHub repo if you have one.
-3. Add environment variables in Railway:
+3. Deploy the backend service from the `server` folder.
+4. Add environment variables in Railway for the backend service:
    - `MONGO_URI`
    - `JWT_SECRET`
+   - `CLIENT_URL` = the frontend service URL, e.g. `https://team-task-manager-production-a42d.up.railway.app`
    - `PORT` (optional)
-4. Set the deployment command for the server:
+5. Deploy the frontend separately from the `client` folder if you want a static site.
+6. Add environment variables in Railway for the frontend service:
+   - `VITE_API_URL` = the backend URL plus `/api`, for example `https://team-task-manager-production-3193.up.railway.app/api`
+7. Set the deployment command for the backend service:
    - `npm install && npm start`
-5. Set the build command for the client if deploying separately:
+8. Set the build command for the frontend service:
    - `npm install && npm run build`
-6. Expose the backend port and deploy the frontend as a static site or as a separate Railway service.
+9. If you deploy frontend and backend together as one Railway service, use the root `package.json` and Railway will build the React app and serve it from the backend.
+
+### Notes for Railway deployment
+- `CLIENT_URL` allows the backend to accept CORS requests from the deployed frontend.
+- `VITE_API_URL` tells the React app where the backend API lives in production.
 
 ### Usage
 1. Register a new account or login.
